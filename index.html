@@ -27,7 +27,9 @@
 <nav class="nav sidebar-nav" id="sideNav" aria-label="Navigation principale">
 <div class="nav-label">Accueil</div>
 <button class="active" data-page="home" aria-current="page">
-<span class="ico">⌂</span>Vue d'ensemble</button>
+<span class="ico">⌂</span>Accueil SPLink</button>
+<button data-page="overview">
+<span class="ico">◫</span>Vue d'ensemble</button>
 <div class="nav-label">Outils chauffeur</div>
 <button data-page="modules">
 <span class="ico">▦</span>Tous les modules</button>
@@ -51,10 +53,11 @@
 </aside>
 <main class="main">
 <header class="topbar">
-<div class="crumb">SPLink <span class="muted">/</span> <strong id="crumbTitle">Vue d'ensemble</strong>
+<div class="crumb">SPLink <span class="muted">/</span> <strong id="crumbTitle">Accueil</strong>
 </div>
 <div class="top-actions">
 <button class="btn outline" id="installPwa" hidden>Installer SPLink</button>
+<button class="btn outline login-link" data-page="login">Se connecter</button>
 <button class="icon-btn" aria-label="Rechercher" data-page="modules">⌕</button>
 <button class="icon-btn" aria-label="Favoris" data-page="account">♡</button>
 <button class="avatar" data-page="account" aria-label="Mon profil">◉</button>
@@ -62,12 +65,45 @@
 </header>
 <div class="content">
 <section class="page active" id="page-home">
+<div class="hero public-hero">
+<img class="hero-image" src="assets/scania-sunset.png" alt="">
+<div class="hero-content">
+<div class="eyebrow">Bienvenue sur SPLink</div>
+<h1>La route en un clic.</h1>
+<p>Des outils, des ressources et des révisions pour accompagner le quotidien des chauffeurs.</p>
+<div class="public-actions">
+<button class="btn light" data-page="login">Se connecter</button>
+<button class="btn public-secondary" data-page="overview">Accéder au site sans compte ↗</button>
+</div>
+</div>
+</div>
+<div class="section-head"><div><div class="eyebrow">À votre service</div><h2>Les ressources utiles, au même endroit</h2></div></div>
+<div class="grid public-features">
+<article class="card"><span class="module-icon" aria-hidden="true">◷</span><h3>Outils chauffeur</h3><p>Prépare tes activités et retrouve les calculateurs utiles au quotidien.</p><button class="btn outline" data-page="modules">Découvrir les outils</button></article>
+<article class="card"><span class="module-icon" aria-hidden="true">✧</span><h3>Formation et révisions</h3><p>Consulte les fiches et entraîne-toi aux révisions C / CE.</p><button class="btn outline" data-open-module="learner">Découvrir les révisions</button></article>
+<article class="card"><span class="module-icon" aria-hidden="true">♡</span><h3>Ton espace local</h3><p>Retrouve tes favoris et ta progression enregistrés sur cet appareil.</p><button class="btn outline" data-page="account">Voir mon espace</button></article>
+</div>
+</section>
+<section class="page" id="page-login" aria-labelledby="loginTitle">
+<div class="login-panel card">
+<div class="eyebrow">Espace SPLink</div>
+<h1 id="loginTitle">Se connecter</h1>
+<p>La connexion à un compte n’est pas encore disponible dans cette version de SPLink.</p>
+<div class="callout">Une ancienne intégration Supabase est présente dans les archives, mais elle n’est pas raccordée ici. Son projet, sa configuration et son fonctionnement doivent être vérifiés avant d’activer une connexion réelle.</div>
+<p>Aucun mot de passe n’est demandé ni enregistré. Les outils, favoris et révisions restent accessibles sans compte sur cet appareil.</p>
+<div class="public-actions">
+<button class="btn" data-page="overview">Continuer sans compte</button>
+<button class="btn outline" data-page="home">Retour à l’accueil</button>
+</div>
+</div>
+</section>
+<section class="page" id="page-overview">
 <div class="hero">
 <img class="hero-image" src="assets/scania-sunset.png" alt="Camion Scania au coucher du soleil">
 <div class="hero-content">
-<div class="eyebrow">Votre espace chauffeur</div>
-<h1>La route en un clic.</h1>
-<p>Les bons outils, les bonnes informations et votre progression, réunis au même endroit.</p>
+<div class="eyebrow">Votre espace chauffeur · sur cet appareil</div>
+<h1>Vue d’ensemble</h1>
+<p>Retrouve tes outils et ta progression locale, sans connexion à un compte.</p>
 <button class="btn light" data-page="modules">Explorer les modules <span>↗</span>
 </button>
 </div>
@@ -149,56 +185,12 @@
 <div class="calc-layout">
 <div class="card">
 <h2>Temps saisis</h2>
-<p>Entre les durées en heures et minutes.</p>
+<p id="durationHelp">Entre une durée en heures et minutes, par exemple 2 h 30.</p>
 <div class="form-grid">
-<div class="duration-pair">
-<div class="field">
-<label for="driveH">Conduite — heures</label>
-<input id="driveH" type="number" min="0" step="1" inputmode="numeric" value="4">
-</div>
-<span aria-hidden="true">h</span>
-<div class="field">
-<label for="driveM">Conduite — minutes</label>
-<input id="driveM" type="number" min="0" max="59" step="1" inputmode="numeric" value="30">
-</div>
-<output id="driveDuration">4 h 30</output>
-</div>
-<div class="duration-pair">
-<div class="field">
-<label for="workH">Autres travaux — heures</label>
-<input id="workH" type="number" min="0" step="1" inputmode="numeric" value="1">
-</div>
-<span aria-hidden="true">h</span>
-<div class="field">
-<label for="workM">Autres travaux — minutes</label>
-<input id="workM" type="number" min="0" max="59" step="1" inputmode="numeric" value="30">
-</div>
-<output id="workDuration">1 h 30</output>
-</div>
-<div class="duration-pair">
-<div class="field">
-<label for="availH">Disponibilité — heures</label>
-<input id="availH" type="number" min="0" step="1" inputmode="numeric" value="1">
-</div>
-<span aria-hidden="true">h</span>
-<div class="field">
-<label for="availM">Disponibilité — minutes</label>
-<input id="availM" type="number" min="0" max="59" step="1" inputmode="numeric" value="0">
-</div>
-<output id="availDuration">1 h 00</output>
-</div>
-<div class="duration-pair">
-<div class="field">
-<label for="breakH">Pause / repos saisi — heures</label>
-<input id="breakH" type="number" min="0" step="1" inputmode="numeric" value="1">
-</div>
-<span aria-hidden="true">h</span>
-<div class="field">
-<label for="breakM">Pause / repos saisi — minutes</label>
-<input id="breakM" type="number" min="0" max="59" step="1" inputmode="numeric" value="0">
-</div>
-<output id="breakDuration">1 h 00</output>
-</div>
+<div class="field"><label for="driveDuration">Conduite</label><input id="driveDuration" type="text" placeholder="Ex. 2 h 30" value="4 h 30" aria-describedby="durationHelp durationError" autocomplete="off"></div>
+<div class="field"><label for="workDuration">Autres travaux</label><input id="workDuration" type="text" placeholder="Ex. 2 h 30" value="1 h 30" aria-describedby="durationHelp durationError" autocomplete="off"></div>
+<div class="field"><label for="availDuration">Disponibilité</label><input id="availDuration" type="text" placeholder="Ex. 2 h 30" value="1 h 00" aria-describedby="durationHelp durationError" autocomplete="off"></div>
+<div class="field"><label for="breakDuration">Pause / repos saisi</label><input id="breakDuration" type="text" placeholder="Ex. 2 h 30" value="1 h 00" aria-describedby="durationHelp durationError" autocomplete="off"></div>
 </div>
 <p id="durationError" role="status"></p>
 <div class="callout">Important : le graphique représente uniquement les durées que tu saisis. Il ne détermine pas à lui seul si une pause, une disponibilité ou un repos satisfait les règles applicables.</div>
@@ -388,11 +380,11 @@ const modules=[
 {id:'favorites',title:'Favoris et historique',desc:'Tes raccourcis et tes derniers modules consultés.',category:'Documents',icon:'♡',accent:'',page:'account',tag:'Personnel'},
 {id:'study',title:'Mon parcours de révision',desc:'Retrouve tes ressources de préparation et ta progression.',category:'Formation',icon:'✧',accent:'linen',legacy:'learner',tag:'Parcours'}
 ];
-const labels={home:'Vue d’ensemble',modules:'Tous les modules',calculator:'Calculateur chauffeur',documents:'Documents utiles',account:'Mon espace',legacy:'Module SPLink'};
+const labels={home:'Accueil',overview:'Vue d’ensemble',login:'Se connecter',modules:'Tous les modules',calculator:'Calculateur chauffeur',documents:'Documents utiles',account:'Mon espace',legacy:'Module SPLink'};
 const getStore=(k,f)=>{try{const raw=localStorage.getItem(k);if(raw===null)return f;const value=JSON.parse(raw);if(Array.isArray(f)?!Array.isArray(value)||!value.every(item=>typeof item==='string'):!value||typeof value!=='object'||Array.isArray(value)||typeof value.name!=='string')throw new Error('Format invalide');return value}catch(error){console.error('Lecture du stockage local impossible',k,error);toast('Données locales indisponibles ou illisibles.');return f}};const setStore=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(error){console.error('Enregistrement local impossible',k,error);toast('Enregistrement local impossible.');return false}};
 let favorites=getStore('splink_user_favorites_v1',[]), history=getStore('splink_user_history_v1',[]), profile=getStore('splink_profile_v1',{name:''}), currentFilter='Tous';
 function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2400)}
-function page(name){const navName=name==='legacy'?'modules':name;$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===navName));$$('nav [data-page], nav [data-open-module], nav [data-training]').forEach(b=>{const active=b.dataset.page===navName;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});$('#crumbTitle').textContent=name==='legacy'?$('#legacyTitle').textContent:labels[name]||'Module';if(name==='modules')syncModuleNav();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});if(name==='account')renderAccount()}
+function page(name){const navName=name==='legacy'?'modules':name;const previousPage=document.activeElement.closest('.page');$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===navName));$$('nav [data-page], nav [data-open-module], nav [data-training]').forEach(b=>{const active=b.dataset.page===navName;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});$('#crumbTitle').textContent=name==='legacy'?$('#legacyTitle').textContent:labels[name]||'Module';if(name==='modules')syncModuleNav();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});if(name==='account')renderAccount();if(previousPage&&!previousPage.classList.contains('active')){const heading=$('#page-'+name+' h1');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}}}
 function addHistory(id){history=[id,...history.filter(x=>x!==id)].slice(0,8);setStore('splink_user_history_v1',history);renderStats()}
 function openModule(id){const m=modules.find(x=>x.id===id)||modules.find(x=>x.legacy===id);if(!m){console.error('Module inconnu',id);toast('Module introuvable');return}if(m.page){page(m.page);return}const render=window.SPModules?.[m.legacy||id];if(!render){console.error('Module natif indisponible',id);toast('Ce module est momentanément indisponible');return}const root=$('#nativeModule');root.replaceChildren();$('#legacyTitle').textContent=m.title;$('#nativeCategory').textContent=m.category;$('#nativeDescription').textContent=m.desc;try{render(root)}catch(error){console.error('Impossible de charger le module',id,error);root.textContent='Ce module ne peut pas être affiché. Consulte la console pour plus de détails.';toast('Erreur lors du chargement du module');return}addHistory(m.id);page('legacy');const nav=$(`#sideNav [data-open-module="${m.legacy}"]`);if(nav){const current=$('#sideNav [aria-current]');current?.removeAttribute('aria-current');current?.classList.remove('active');nav.classList.add('active');nav.setAttribute('aria-current','page')}$('#legacyTitle').setAttribute('tabindex','-1');$('#legacyTitle').focus({preventScroll:true});}
 function toggleFavorite(id){const container=document.activeElement.closest('#quickModules,#allModules,#documentList,#favoriteList');favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];const saved=setStore('splink_user_favorites_v1',favorites);renderModules();renderStats();renderAccount();renderDocs();const target=container?.querySelector(`[data-favorite="${id}"]`);if(target)target.focus();else if(container?.id==='favoriteList')$('#favoriteHeading').focus();if(saved)toast(favorites.includes(id)?'Ajouté aux favoris':'Retiré des favoris')}
@@ -430,9 +422,9 @@ const officialResources=[
 ];
 function renderDocs(){const q=($('#docSearch').value||'').toLowerCase();const docs=catalogueModules.filter(m=>m.category==='Documents'||['forms','learner'].includes(m.id)).filter(m=>(m.title+' '+m.desc).toLowerCase().includes(q));$('#documentList').innerHTML=docs.map(m=>`<article class="card doc-card"><div class="doc-icon">${m.id==='reglementation'?'WEB':'DOC'}</div><div style="flex:1"><h3>${m.title}</h3><p>${m.desc}</p><button class="btn outline" data-open="${m.id}">Consulter ↗</button></div><button class="icon-btn" data-favorite="${m.id}" aria-label="${favorites.includes(m.id)?'Retirer':'Ajouter'} ${m.title} ${favorites.includes(m.id)?'des':'aux'} favoris" aria-pressed="${favorites.includes(m.id)}">${favorites.includes(m.id)?'♥':'♡'}</button></article>`).join('')||'<div class="empty">Aucun document correspondant.</div>';const resources=officialResources.filter(r=>(r.title+' '+r.desc+' '+r.tag).toLowerCase().includes(q));$('#officialResources').innerHTML=resources.map(r=>`<article class="card doc-card"><div class="doc-icon">WEB</div><div style="flex:1"><h3>${r.title}</h3><p>${r.desc}</p><span class="pill">${r.tag}</span><div style="margin-top:12px"><a class="btn outline" href="${r.url}" target="_blank" rel="noopener noreferrer">Ouvrir la ressource ↗</a></div></div></article>`).join('')||'<div class="empty">Aucune ressource correspondante.</div>';bindCards()}
 const cats=[{key:'drive',label:'Conduite',color:'#29362F'},{key:'work',label:'Autres travaux',color:'#C4775D'},{key:'avail',label:'Disponibilité',color:'#879783'},{key:'break',label:'Pause / repos saisi',color:'#E8DDCA'}];
-function min(id){const h=$('#'+id+'H'),m=$('#'+id+'M');const valid=h.value!==''&&m.value!==''&&h.validity.valid&&m.validity.valid&&Number.isSafeInteger(Number(h.value)*60+Number(m.value));h.setAttribute('aria-invalid',String(!valid));m.setAttribute('aria-invalid',String(!valid));return valid?Number(h.value)*60+Number(m.value):null}function fmt(n){return `${Math.floor(n/60)} h ${String(n%60).padStart(2,'0')}`}
-function renderChart(){const vals=cats.map(x=>min(x.key));cats.forEach((x,i)=>$('#'+x.key+'Duration').textContent=vals[i]===null?'Durée invalide':fmt(vals[i]));if(vals.some(v=>v===null)){ $('#durationError').textContent='Saisis des heures entières et des minutes entières de 0 à 59.';$('#donutSegments').replaceChildren();$('#donutTotal').textContent='—';$('#chartLegend').replaceChildren();$('#totalSummary').textContent='—';$('#driveSummary').textContent='—';$('#drivePercent').textContent='—';return}$('#durationError').textContent='';const total=vals.reduce((a,b)=>a+b,0),r=78,c=2*Math.PI*r;let offset=0;$('#donutSegments').innerHTML=vals.map((v,i)=>{const len=total?v/total*c:0;const el=`<circle cx="110" cy="110" r="${r}" fill="none" stroke="${cats[i].color}" stroke-width="30" stroke-dasharray="${len} ${c-len}" stroke-dashoffset="${-offset}"/>`;offset+=len;return el}).join('');$('#donutTotal').textContent=fmt(total);$('#chartLegend').innerHTML=cats.map((x,i)=>`<div class="legend-row"><span class="swatch" style="background:${x.color}"></span><span>${x.label}<b>${fmt(vals[i])} · ${total?Math.round(vals[i]/total*100):0}%</b></span></div>`).join('');$('#totalSummary').textContent=fmt(total);$('#driveSummary').textContent=fmt(vals[0]);$('#drivePercent').textContent=(total?Math.round(vals[0]/total*100):0)+'%'}
-$$('[data-page]').forEach(b=>b.addEventListener('click',e=>{if(b.tagName==='A')e.preventDefault();page(b.dataset.page)}));$$('[data-open-module]').forEach(b=>b.addEventListener('click',()=>openModule(b.dataset.openModule)));$('#moduleSearch').addEventListener('input',renderModules);$('#docSearch').addEventListener('input',renderDocs);$$('[data-filter]').forEach(b=>{b.setAttribute('aria-pressed',String(b.classList.contains('active')));b.addEventListener('click',()=>{currentFilter=b.dataset.filter;$$('[data-filter]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});renderModules()})});$('#saveProfile').addEventListener('click',()=>{profile.name=$('#displayName').value.trim();if(setStore('splink_profile_v1',profile))toast('Profil enregistré sur cet appareil')});$('#clearHistory').addEventListener('click',()=>{history=[];const saved=setStore('splink_user_history_v1',history);renderAccount();renderStats();if(saved)toast('Historique local effacé')});['driveH','driveM','workH','workM','availH','availM','breakH','breakM'].forEach(id=>$('#'+id).addEventListener('input',renderChart));$('#resetCalc').addEventListener('click',()=>{const vals={driveH:4,driveM:30,workH:1,workM:30,availH:1,availM:0,breakH:1,breakM:0};Object.entries(vals).forEach(([k,v])=>$('#'+k).value=v);renderChart()});
+function min(id){const input=$('#'+id+'Duration'),match=/^(\d+)\s*h\s*([0-5]?\d)$/i.exec(input.value.trim());const value=match?Number(match[1])*60+Number(match[2]):null;const valid=value!==null&&Number.isSafeInteger(value);input.setAttribute('aria-invalid',String(!valid));return valid?value:null}function fmt(n){return `${Math.floor(n/60)} h ${String(n%60).padStart(2,'0')}`}
+function renderChart(){const vals=cats.map(x=>min(x.key));const total=vals.some(v=>v===null)?null:vals.reduce((a,b)=>a+b,0);if(total===null||!Number.isSafeInteger(total)){const invalid=cats.filter((x,i)=>vals[i]===null).map(x=>x.label);$('#durationError').textContent=invalid.length?`Durée invalide pour ${invalid.join(', ')}. Utilise le format 2 h 30 avec des minutes de 0 à 59.`:'Le total est trop élevé. Réduis les durées saisies.';$('#donutSegments').replaceChildren();$('#donutTotal').textContent='—';$('#chartLegend').replaceChildren();$('#totalSummary').textContent='—';$('#driveSummary').textContent='—';$('#drivePercent').textContent='—';return}$('#durationError').textContent='';const r=78,c=2*Math.PI*r;let offset=0;$('#donutSegments').innerHTML=vals.map((v,i)=>{const len=total?v/total*c:0;const el=`<circle cx="110" cy="110" r="${r}" fill="none" stroke="${cats[i].color}" stroke-width="30" stroke-dasharray="${len} ${c-len}" stroke-dashoffset="${-offset}"/>`;offset+=len;return el}).join('');$('#donutTotal').textContent=fmt(total);$('#chartLegend').innerHTML=cats.map((x,i)=>`<div class="legend-row"><span class="swatch" style="background:${x.color}"></span><span>${x.label}<b>${fmt(vals[i])} · ${total?Math.round(vals[i]/total*100):0}%</b></span></div>`).join('');$('#totalSummary').textContent=fmt(total);$('#driveSummary').textContent=fmt(vals[0]);$('#drivePercent').textContent=(total?Math.round(vals[0]/total*100):0)+'%'}
+$$('[data-page]').forEach(b=>b.addEventListener('click',e=>{if(b.tagName==='A')e.preventDefault();page(b.dataset.page)}));$$('[data-open-module]').forEach(b=>b.addEventListener('click',()=>openModule(b.dataset.openModule)));$('#moduleSearch').addEventListener('input',renderModules);$('#docSearch').addEventListener('input',renderDocs);$$('[data-filter]').forEach(b=>{b.setAttribute('aria-pressed',String(b.classList.contains('active')));b.addEventListener('click',()=>{currentFilter=b.dataset.filter;$$('[data-filter]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});renderModules()})});$('#saveProfile').addEventListener('click',()=>{profile.name=$('#displayName').value.trim();if(setStore('splink_profile_v1',profile))toast('Profil enregistré sur cet appareil')});$('#clearHistory').addEventListener('click',()=>{history=[];const saved=setStore('splink_user_history_v1',history);renderAccount();renderStats();if(saved)toast('Historique local effacé')});cats.forEach(({key})=>{const input=$('#'+key+'Duration');input.addEventListener('input',renderChart);input.addEventListener('blur',()=>{const value=min(key);if(value!==null)input.value=fmt(value)})});$('#resetCalc').addEventListener('click',()=>{const vals={drive:'4 h 30',work:'1 h 30',avail:'1 h 00',break:'1 h 00'};Object.entries(vals).forEach(([k,v])=>$('#'+k+'Duration').value=v);renderChart()});
 renderModules();renderStats();renderDocs();renderChart();renderAccount();
 $('#saveProfile').addEventListener('click',()=>{$('#accountGreeting').textContent=profile.name?`Bonjour ${profile.name}`:'Bienvenue sur SPLink'});
 function syncModuleNav(){const training=currentFilter==='Formation';$('#modulesHeading').textContent=training?'Formation':'Tous les modules';if(!$('#page-modules').classList.contains('active'))return;$('#crumbTitle').textContent=training?'Formation':labels.modules;[$('#mobileNav [data-page="modules"]'),$('[data-training]')].forEach((button,index)=>{const active=index===Number(training);button.classList.toggle('active',active);if(active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')})}
@@ -441,7 +433,7 @@ $$('[data-filter]').forEach(button=>button.addEventListener('click',syncModuleNa
 $('[data-training]').addEventListener('click',()=>{$('#moduleSearch').value='';$('[data-filter="Formation"]').click();page('modules')});
 let deferredInstallPrompt=null;
 const installButton=$('#installPwa'),accountInstall=$('#accountInstallPwa'),pwaStatus=$('#pwaStatus');
-function updatePwaStatus(){if(!pwaStatus)return;const online=navigator.onLine;pwaStatus.textContent=(online?'Connecté':'Hors connexion')+' · '+(window.matchMedia('(display-mode: standalone)').matches||navigator.standalone?'SPLink est installé sur cet appareil':'Installation disponible selon le navigateur');}
+function updatePwaStatus(){if(!pwaStatus)return;const online=navigator.onLine;pwaStatus.textContent=(online?'En ligne':'Hors ligne')+' · '+(window.matchMedia('(display-mode: standalone)').matches||navigator.standalone?'SPLink est installé sur cet appareil':'Installation disponible selon le navigateur');}
 window.addEventListener('online',updatePwaStatus);window.addEventListener('offline',updatePwaStatus);
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;if(installButton)installButton.hidden=false;});
 async function installPwa(){if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;if(installButton)installButton.hidden=true;updatePwaStatus();return;}if(/iphone|ipad|ipod/i.test(navigator.userAgent)){toast('Sur iPhone : Safari → Partager → Sur l’écran d’accueil.');if(pwaStatus)pwaStatus.textContent='Sur iPhone : ouvre dans Safari, touche Partager puis « Sur l’écran d’accueil ».';}else{toast('Utilise le menu de ton navigateur pour installer SPLink.');if(pwaStatus)pwaStatus.textContent='Ouvre le menu du navigateur puis « Installer » ou « Ajouter à l’écran d’accueil ». ';}}

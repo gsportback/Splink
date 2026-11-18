@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>if(window.Capacitor?.getPlatform() === 'ios')document.documentElement.classList.add('native-ios');</script>
 <meta name="theme-color" content="#29362f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="SPLink"><link rel="apple-touch-icon" href="assets/icon-192.png"><meta name="description" content="SPLink — les outils utiles aux chauffeurs, au même endroit.">
 <title>SPLink — La route en un clic</title>
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/splink-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/native-modules.css">
@@ -18,7 +19,7 @@
 <body><div class="app">
 <aside class="sidebar">
 <a class="brand" href="#accueil" data-page="home">
-<div class="brand-mark">S.</div>
+<img class="brand-logo" src="assets/splink-logo.png" alt="" width="44" height="44">
 <div>
 <div class="brand-name">SPLink</div>
 <span class="brand-sub">LA ROUTE EN UN CLIC</span>
@@ -44,8 +45,8 @@
 <span class="ico">☷</span>Fiches pratiques</button>
 <button data-open-module="reglementation">
 <span class="ico">⚖</span>Réglementation</button>
-<div class="nav-label">Personnel</div>
-<button data-page="account">
+<div class="nav-label" hidden>Personnel</div>
+<button data-page="account" hidden>
 <span class="ico">◉</span>Mon espace</button>
 </nav>
 <div class="sidebar-bottom">Une route plus simple.<br>
@@ -53,44 +54,59 @@
 </aside>
 <main class="main">
 <header class="topbar">
-<div class="crumb">SPLink <span class="muted">/</span> <strong id="crumbTitle">Accueil</strong>
+<div class="topbar-identity">
+<a class="header-brand" href="#accueil" data-page="home" aria-label="SPLink — accueil">
+<img src="assets/splink-logo.png" alt="" width="44" height="44"><span>SPLink</span></a>
+<div class="crumb"><span class="muted">/</span> <strong id="crumbTitle">Accueil</strong></div>
 </div>
 <div class="top-actions">
 <button class="btn outline" id="installPwa" hidden>Installer SPLink</button>
 <button class="btn outline login-link" data-page="login">Se connecter</button>
 <button class="icon-btn" aria-label="Rechercher" data-page="modules">⌕</button>
-<button class="icon-btn" aria-label="Favoris" data-page="account">♡</button>
-<button class="avatar" data-page="account" aria-label="Mon profil">◉</button>
+<button class="icon-btn" aria-label="Favoris" data-page="account" hidden>♡</button>
+<button class="avatar" data-page="account" aria-label="Mon profil" hidden>◉</button>
 </div>
 </header>
 <div class="content">
 <section class="page active" id="page-home">
 <div class="hero public-hero">
-<img class="hero-image" src="assets/scania-sunset.png" alt="">
+<img class="hero-image" src="assets/scania-sunset.png" alt="" onerror="this.hidden=true">
 <div class="hero-content">
-<div class="eyebrow">Bienvenue sur SPLink</div>
-<h1>La route en un clic.</h1>
-<p>Des outils, des ressources et des révisions pour accompagner le quotidien des chauffeurs.</p>
+<div class="eyebrow">Pour les futurs chauffeurs et les professionnels</div>
+<h1>Les outils du chauffeur, réunis au même endroit.</h1>
+<p>SPLink aide les chauffeurs poids lourds à préparer leur activité et leurs révisions, de la formation au quotidien sur la route.</p>
 <div class="public-actions">
-<button class="btn light" data-page="login">Se connecter</button>
-<button class="btn public-secondary" data-page="overview">Accéder au site sans compte ↗</button>
+<button class="btn light" data-page="modules">Explorer les outils</button>
+<button class="btn public-secondary" data-open-module="learner">Découvrir les révisions</button>
+<button class="btn public-secondary" data-page="login">Se connecter</button>
 </div>
 </div>
 </div>
-<div class="section-head"><div><div class="eyebrow">À votre service</div><h2>Les ressources utiles, au même endroit</h2></div></div>
+<div class="section-head"><div><div class="eyebrow">Selon ton besoin</div><h2>Que peux-tu faire sur SPLink ?</h2><p>En formation, en préparation du permis C / CE ou déjà en activité : retrouve les outils utiles pour mieux préparer ton activité.</p></div></div>
 <div class="grid public-features">
-<article class="card"><span class="module-icon" aria-hidden="true">◷</span><h3>Outils chauffeur</h3><p>Prépare tes activités et retrouve les calculateurs utiles au quotidien.</p><button class="btn outline" data-page="modules">Découvrir les outils</button></article>
-<article class="card"><span class="module-icon" aria-hidden="true">✧</span><h3>Formation et révisions</h3><p>Consulte les fiches et entraîne-toi aux révisions C / CE.</p><button class="btn outline" data-open-module="learner">Découvrir les révisions</button></article>
-<article class="card"><span class="module-icon" aria-hidden="true">♡</span><h3>Ton espace local</h3><p>Retrouve tes favoris et ta progression enregistrés sur cet appareil.</p><button class="btn outline" data-page="account">Voir mon espace</button></article>
+<article class="card"><span class="module-icon" aria-hidden="true">◷</span><h3>Calculer tes temps</h3><p>Saisis tes activités pour visualiser leur durée et leur répartition.</p><button class="btn outline" data-page="calculator">Ouvrir le calculateur</button></article>
+<article class="card"><span class="module-icon" aria-hidden="true">☷</span><h3>Préparer une mission</h3><p>Utilise une checklist pour suivre les étapes avant de prendre la route.</p><button class="btn outline" data-open-module="mission">Préparer ma mission</button></article>
+<article class="card"><span class="module-icon" aria-hidden="true">▤</span><h3>Vérifier le chargement</h3><p>Estime la charge et retrouve des points de contrôle pour l’arrimage.</p><button class="btn outline" data-open-module="chargecalc">Calculer la charge</button></article>
+<article class="card"><span class="module-icon" aria-hidden="true">⚖</span><h3>Consulter des documents</h3><p>Retrouve des ressources utiles et des liens vers les textes officiels.</p><button class="btn outline" data-page="documents">Voir les documents</button></article>
+<article class="card"><span class="module-icon" aria-hidden="true">✧</span><h3>Réviser les permis C / CE</h3><p>Découvre les fiches et les entraînements destinés à la préparation des permis.</p><button class="btn outline" data-open-module="learner">Découvrir les révisions</button></article>
 </div>
+<section class="card public-access" aria-labelledby="public-access-title">
+<div><div class="eyebrow">Accès au site</div><h2 id="public-access-title">Avec ou sans compte</h2>
+<p><strong>Sans compte :</strong> utilise les calculateurs, checklists et documents ; tes favoris restent sur cet appareil.</p>
+<p><strong>Révisions C / CE :</strong> leurs titres et descriptions sont visibles. Leur contenu nécessitera une connexion, qui n’est pas encore disponible.</p>
+<p>Ces outils et supports pédagogiques ne remplacent ni les documents officiels ni les règles applicables.</p></div>
+<button class="btn outline" data-page="login">Se connecter</button>
+</section>
 </section>
 <section class="page" id="page-login" aria-labelledby="loginTitle">
 <div class="login-panel card">
+<img class="login-logo" src="assets/splink-logo.png" alt="SPLink" width="96" height="96">
 <div class="eyebrow">Espace SPLink</div>
 <h1 id="loginTitle">Se connecter</h1>
 <p>La connexion à un compte n’est pas encore disponible dans cette version de SPLink.</p>
+<p id="loginDestination" role="status" hidden></p>
 <div class="callout">Une ancienne intégration Supabase est présente dans les archives, mais elle n’est pas raccordée ici. Son projet, sa configuration et son fonctionnement doivent être vérifiés avant d’activer une connexion réelle.</div>
-<p>Aucun mot de passe n’est demandé ni enregistré. Les outils, favoris et révisions restent accessibles sans compte sur cet appareil.</p>
+<p>Aucun mot de passe n’est demandé ni enregistré. Les outils et favoris locaux restent accessibles sans compte ; les révisions C / CE nécessitent une connexion qui doit encore être configurée.</p>
 <div class="public-actions">
 <button class="btn" data-page="overview">Continuer sans compte</button>
 <button class="btn outline" data-page="home">Retour à l’accueil</button>
@@ -99,11 +115,11 @@
 </section>
 <section class="page" id="page-overview">
 <div class="hero">
-<img class="hero-image" src="assets/scania-sunset.png" alt="Camion Scania au coucher du soleil">
+<img class="hero-image" src="assets/scania-sunset.png" alt="Camion Scania au coucher du soleil" onerror="this.hidden=true">
 <div class="hero-content">
 <div class="eyebrow">Votre espace chauffeur · sur cet appareil</div>
 <h1>Vue d’ensemble</h1>
-<p>Retrouve tes outils et ta progression locale, sans connexion à un compte.</p>
+<p>Retrouve tes outils et tes raccourcis locaux, sans connexion à un compte.</p>
 <button class="btn light" data-page="modules">Explorer les modules <span>↗</span>
 </button>
 </div>
@@ -149,7 +165,7 @@
 <div class="eyebrow">Reprendre le fil</div>
 <h2>Récemment consultés</h2>
 </div>
-<button class="btn outline" data-page="account">Mon activité</button>
+<button class="btn outline" data-page="account" hidden>Mon activité</button>
 </div>
 <div class="card" id="recentHome">
 <div class="empty">Tes modules consultés apparaîtront ici.</div>
@@ -268,12 +284,13 @@
 <div class="callout">
 <strong>État des fichiers :</strong> le HTML d’origine cite les PDF « Socle &amp; Thèmes permis C Discord.pdf » et « Vérifs &amp; Thèmes Permis CE Discord.pdf », mais ne contient pas ces PDF comme fichiers autonomes. Les contenus de révision intégrés sont conservés ; les PDF originaux devront être ajoutés pour proposer leur téléchargement direct.</div>
 </section>
-<section class="page" id="page-account">
+<section class="page" id="page-account" hidden>
 <div class="eyebrow">Votre espace personnel</div>
 <h1>Mon espace</h1>
+<div class="callout"><strong>Aucun compte connecté.</strong> La connexion et la synchronisation ne sont pas encore disponibles. Les favoris et réglages ci-dessous sont locaux, non associés à un compte. <button class="btn outline" data-page="login">Se connecter</button></div>
 <div class="account-welcome">
 <div><h2 id="accountGreeting">Bienvenue sur SPLink</h2>
-<p>Retrouve tes raccourcis et tes révisions. Ces données restent dans ce navigateur, sur cet appareil.</p></div>
+<p>Retrouve tes raccourcis locaux dans ce navigateur, sur cet appareil. Tes résultats de révision nécessitent une connexion.</p></div>
 <a class="btn outline" href="#account-profile">Profil et réglages ↓</a>
 </div>
 <div class="account-grid">
@@ -308,9 +325,7 @@
 <h2>Activité et révisions</h2>
 <div class="list-row"><div><strong>Modules récents</strong><small>Les 8 derniers au maximum</small></div><strong id="accountRecentCount">0</strong></div>
 <div class="list-row"><div><strong>Favoris</strong><small>Raccourcis enregistrés</small></div><strong id="accountFavCount">0</strong></div>
-<div class="list-row"><div><strong>Auto-évaluations écrites</strong><small id="accountWritten">Aucune réponse enregistrée</small></div></div>
-<div class="list-row"><div><strong>Résultats QCM</strong><small id="accountQuiz">Aucune réponse enregistrée</small></div></div>
-<div class="list-row"><div><strong>Entraînements oraux</strong><small id="accountOral">Aucune évaluation enregistrée</small></div></div>
+<div class="list-row"><div><strong>Progression et résultats de révision</strong><small>La connexion doit être activée pour consulter ces résultats.</small></div></div>
 <button class="btn outline" data-open-module="learner">Reprendre mes révisions ↗</button>
 </section>
 <section class="card" id="account-profile">
@@ -351,7 +366,7 @@
 <span>✧</span>Formation</button>
 <button data-page="documents">
 <span>▤</span>Docs</button>
-<button data-page="account">
+<button data-page="account" hidden>
 <span>◉</span>Mon espace</button>
 </nav>
 <div class="toast" id="toast" role="status" aria-live="polite">
@@ -384,16 +399,15 @@ const labels={home:'Accueil',overview:'Vue d’ensemble',login:'Se connecter',mo
 const getStore=(k,f)=>{try{const raw=localStorage.getItem(k);if(raw===null)return f;const value=JSON.parse(raw);if(Array.isArray(f)?!Array.isArray(value)||!value.every(item=>typeof item==='string'):!value||typeof value!=='object'||Array.isArray(value)||typeof value.name!=='string')throw new Error('Format invalide');return value}catch(error){console.error('Lecture du stockage local impossible',k,error);toast('Données locales indisponibles ou illisibles.');return f}};const setStore=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(error){console.error('Enregistrement local impossible',k,error);toast('Enregistrement local impossible.');return false}};
 let favorites=getStore('splink_user_favorites_v1',[]), history=getStore('splink_user_history_v1',[]), profile=getStore('splink_profile_v1',{name:''}), currentFilter='Tous';
 function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2400)}
-function page(name){const navName=name==='legacy'?'modules':name;const previousPage=document.activeElement.closest('.page');$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===navName));$$('nav [data-page], nav [data-open-module], nav [data-training]').forEach(b=>{const active=b.dataset.page===navName;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});$('#crumbTitle').textContent=name==='legacy'?$('#legacyTitle').textContent:labels[name]||'Module';if(name==='modules')syncModuleNav();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});if(name==='account')renderAccount();if(previousPage&&!previousPage.classList.contains('active')){const heading=$('#page-'+name+' h1');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}}}
+function page(name){if(name==='account'){const destination=$('#loginDestination');destination.textContent='L’espace personnel nécessite une connexion, qui n’est pas encore disponible.';destination.hidden=false;name='login'}const navName=name==='legacy'?'modules':name;const previousPage=document.activeElement.closest('.page');$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===navName));$$('nav [data-page], nav [data-open-module], nav [data-training]').forEach(b=>{const active=b.dataset.page===navName;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});$('#crumbTitle').textContent=name==='legacy'?$('#legacyTitle').textContent:labels[name]||'Module';if(name==='modules')syncModuleNav();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});if(previousPage&&!previousPage.classList.contains('active')){const heading=$('#page-'+name+' h1');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}}}
 function addHistory(id){history=[id,...history.filter(x=>x!==id)].slice(0,8);setStore('splink_user_history_v1',history);renderStats()}
-function openModule(id){const m=modules.find(x=>x.id===id)||modules.find(x=>x.legacy===id);if(!m){console.error('Module inconnu',id);toast('Module introuvable');return}if(m.page){page(m.page);return}const render=window.SPModules?.[m.legacy||id];if(!render){console.error('Module natif indisponible',id);toast('Ce module est momentanément indisponible');return}const root=$('#nativeModule');root.replaceChildren();$('#legacyTitle').textContent=m.title;$('#nativeCategory').textContent=m.category;$('#nativeDescription').textContent=m.desc;try{render(root)}catch(error){console.error('Impossible de charger le module',id,error);root.textContent='Ce module ne peut pas être affiché. Consulte la console pour plus de détails.';toast('Erreur lors du chargement du module');return}addHistory(m.id);page('legacy');const nav=$(`#sideNav [data-open-module="${m.legacy}"]`);if(nav){const current=$('#sideNav [aria-current]');current?.removeAttribute('aria-current');current?.classList.remove('active');nav.classList.add('active');nav.setAttribute('aria-current','page')}$('#legacyTitle').setAttribute('tabindex','-1');$('#legacyTitle').focus({preventScroll:true});}
-function toggleFavorite(id){const container=document.activeElement.closest('#quickModules,#allModules,#documentList,#favoriteList');favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];const saved=setStore('splink_user_favorites_v1',favorites);renderModules();renderStats();renderAccount();renderDocs();const target=container?.querySelector(`[data-favorite="${id}"]`);if(target)target.focus();else if(container?.id==='favoriteList')$('#favoriteHeading').focus();if(saved)toast(favorites.includes(id)?'Ajouté aux favoris':'Retiré des favoris')}
-function card(m){const fav=favorites.includes(m.id);return `<article class="card module-card"><button class="native-card-open" data-open="${m.id}" aria-label="Ouvrir ${m.title}"><span class="module-icon ${m.accent||''}" aria-hidden="true">${m.icon}</span><span><strong>${m.title}</strong><span class="native-card-description">${m.desc}</span></span><span class="module-foot"><span class="pill">${m.tag}</span><span>Ouvrir ↗</span></span></button><button class="icon-btn native-card-favorite" data-favorite="${m.id}" aria-label="${fav?'Retirer':'Ajouter'} ${m.title} ${fav?'des':'aux'} favoris" aria-pressed="${fav}">${fav?'♥':'♡'}</button></article>`}
+function openModule(id){const m=modules.find(x=>x.id===id)||modules.find(x=>x.legacy===id);if(!m){console.error('Module inconnu',id);toast('Module introuvable');return}if(m.legacy==='learner'){const destination=$('#loginDestination');destination.textContent=`${m.title} : connexion nécessaire. L’accès sera possible lorsque la connexion réelle sera configurée.`;destination.hidden=false;page('login');return}if(m.page){page(m.page);return}const render=window.SPModules?.[m.legacy||id];if(!render){console.error('Module natif indisponible',id);toast('Ce module est momentanément indisponible');return}const root=$('#nativeModule');root.replaceChildren();$('#legacyTitle').textContent=m.title;$('#nativeCategory').textContent=m.category;$('#nativeDescription').textContent=m.desc;try{render(root)}catch(error){console.error('Impossible de charger le module',id,error);root.textContent='Ce module ne peut pas être affiché. Consulte la console pour plus de détails.';toast('Erreur lors du chargement du module');return}addHistory(m.id);page('legacy');const nav=$(`#sideNav [data-open-module="${m.legacy}"]`);if(nav){const current=$('#sideNav [aria-current]');current?.removeAttribute('aria-current');current?.classList.remove('active');nav.classList.add('active');nav.setAttribute('aria-current','page')}$('#legacyTitle').setAttribute('tabindex','-1');$('#legacyTitle').focus({preventScroll:true});}
+function toggleFavorite(id){const container=document.activeElement.closest('#quickModules,#allModules,#documentList,#favoriteList');favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];const saved=setStore('splink_user_favorites_v1',favorites);renderModules();renderStats();renderDocs();const target=container?.querySelector(`[data-favorite="${id}"]`);if(target)target.focus();else if(container?.id==='favoriteList')$('#favoriteHeading').focus();if(saved)toast(favorites.includes(id)?'Ajouté aux favoris':'Retiré des favoris')}
+function card(m){const fav=favorites.includes(m.id);return `<article class="card module-card"><button class="native-card-open" data-open="${m.id}" aria-label="${m.legacy==='learner'?'Connexion nécessaire pour':'Ouvrir'} ${m.title}"><span class="module-icon ${m.accent||''}" aria-hidden="true">${m.icon}</span><span><strong>${m.title}</strong><span class="native-card-description">${m.desc}</span></span><span class="module-foot"><span class="pill">${m.tag}</span><span>${m.legacy==='learner'?'Connexion nécessaire':'Ouvrir ↗'}</span></span></button><button class="icon-btn native-card-favorite" data-favorite="${m.id}" aria-label="${fav?'Retirer':'Ajouter'} ${m.title} ${fav?'des':'aux'} favoris" aria-pressed="${fav}">${fav?'♥':'♡'}</button></article>`}
 const catalogueModules=modules.filter(m=>!['documents','favorites','study'].includes(m.id));
 function renderModules(){const q=($('#moduleSearch')?.value||'').toLowerCase();const filtered=catalogueModules.filter(m=>(currentFilter==='Tous'||m.category===currentFilter||(currentFilter==='Formation'&&m.id==='reglementation'))&&(m.title+' '+m.desc+' '+m.category).toLowerCase().includes(q));$('#allModules').innerHTML=filtered.map(card).join('')||'<div class="empty">Aucun module trouvé.</div>';$('#quickModules').innerHTML=catalogueModules.slice(0,3).map(card).join('');bindCards()}
 function bindCards(){ $$('[data-open]').forEach(el=>{el.onclick=()=>openModule(el.dataset.open)});$$('[data-favorite]').forEach(b=>b.onclick=()=>toggleFavorite(b.dataset.favorite)) }
 function renderStats(){ $('#statModules').textContent=catalogueModules.length;$('#statFavorites').textContent=favorites.length;$('#statRecent').textContent=history.length;const rows=history.map(id=>modules.find(m=>m.id===id)).filter(Boolean);$('#recentHome').innerHTML=rows.length?rows.slice(0,4).map(m=>`<div class="list-row"><div><strong>${m.title}</strong><small>${m.category}</small></div><button class="btn outline" data-open="${m.id}">Reprendre ↗</button></div>`).join(''):'<div class="empty">Tes modules consultés apparaîtront ici.</div>';bindCards()}
-function readProgress(key, validate){try{const raw=localStorage.getItem(key);if(raw===null)return null;const value=JSON.parse(raw);if(!validate(value))throw new Error('Format invalide');return value}catch(error){console.error('Lecture de la progression impossible',key,error);return undefined}}
 function renderAccount(){
   $('#displayName').value=profile.name||'';
   $('#accountGreeting').textContent=profile.name?`Bonjour ${profile.name}`:'Bienvenue sur SPLink';
@@ -402,12 +416,6 @@ function renderAccount(){
   $('#accountRecentCount').textContent=rec.length;$('#accountFavCount').textContent=favs.length;
   $('#favoriteList').innerHTML=favs.length?favs.map(m=>`<div class="list-row"><div><strong>${m.title}</strong><small>${m.category}</small></div><div class="account-list-actions"><button class="btn outline" data-open="${m.id}">Ouvrir</button><button class="icon-btn" data-favorite="${m.id}" aria-label="Retirer ${m.title} des favoris" aria-pressed="true">♥</button></div></div>`).join(''):'<div class="empty">Aucun favori pour le moment. Ajoute-en depuis les cartes des modules.</div>';
   $('#historyList').innerHTML=rec.length?rec.map(m=>`<div class="list-row"><div><strong>${m.title}</strong><small>Consulté récemment</small></div><button class="btn outline" data-open="${m.id}">Reprendre</button></div>`).join(''):'<div class="empty">Aucune activité pour le moment. Les modules consultés apparaîtront ici.</div>';
-  const written=readProgress('spl-learner-written-v1',v=>v&&Number.isInteger(v.done)&&v.done>=0&&Number.isInteger(v.good)&&v.good>=0&&v.good<=v.done);
-  const quiz=readProgress('spl-learner-qcm-v1',v=>v&&Number.isInteger(v.done)&&v.done>=0&&Number.isInteger(v.good)&&v.good>=0&&v.good<=v.done);
-  const oral=readProgress('cabineo_oral_progress_v1',v=>v&&typeof v==='object'&&!Array.isArray(v));
-  $('#accountWritten').textContent=written===undefined?'Données indisponibles ou illisibles':written&&written.done?`${written.good} réponse(s) jugée(s) juste(s) sur ${written.done}`:'Aucune réponse enregistrée';
-  $('#accountQuiz').textContent=quiz===undefined?'Données indisponibles ou illisibles':quiz&&quiz.done?`${quiz.good} bonne(s) réponse(s) sur ${quiz.done}`:'Aucune réponse enregistrée';
-  $('#accountOral').textContent=oral===undefined?'Données indisponibles ou illisibles':oral&&Object.keys(oral).length?`${Object.keys(oral).length} auto-évaluation(s) enregistrée(s)`:'Aucune évaluation enregistrée';
   bindCards();
 }
 const officialResources=[
@@ -425,7 +433,9 @@ const cats=[{key:'drive',label:'Conduite',color:'#29362F'},{key:'work',label:'Au
 function min(id){const input=$('#'+id+'Duration'),match=/^(\d+)\s*h\s*([0-5]?\d)$/i.exec(input.value.trim());const value=match?Number(match[1])*60+Number(match[2]):null;const valid=value!==null&&Number.isSafeInteger(value);input.setAttribute('aria-invalid',String(!valid));return valid?value:null}function fmt(n){return `${Math.floor(n/60)} h ${String(n%60).padStart(2,'0')}`}
 function renderChart(){const vals=cats.map(x=>min(x.key));const total=vals.some(v=>v===null)?null:vals.reduce((a,b)=>a+b,0);if(total===null||!Number.isSafeInteger(total)){const invalid=cats.filter((x,i)=>vals[i]===null).map(x=>x.label);$('#durationError').textContent=invalid.length?`Durée invalide pour ${invalid.join(', ')}. Utilise le format 2 h 30 avec des minutes de 0 à 59.`:'Le total est trop élevé. Réduis les durées saisies.';$('#donutSegments').replaceChildren();$('#donutTotal').textContent='—';$('#chartLegend').replaceChildren();$('#totalSummary').textContent='—';$('#driveSummary').textContent='—';$('#drivePercent').textContent='—';return}$('#durationError').textContent='';const r=78,c=2*Math.PI*r;let offset=0;$('#donutSegments').innerHTML=vals.map((v,i)=>{const len=total?v/total*c:0;const el=`<circle cx="110" cy="110" r="${r}" fill="none" stroke="${cats[i].color}" stroke-width="30" stroke-dasharray="${len} ${c-len}" stroke-dashoffset="${-offset}"/>`;offset+=len;return el}).join('');$('#donutTotal').textContent=fmt(total);$('#chartLegend').innerHTML=cats.map((x,i)=>`<div class="legend-row"><span class="swatch" style="background:${x.color}"></span><span>${x.label}<b>${fmt(vals[i])} · ${total?Math.round(vals[i]/total*100):0}%</b></span></div>`).join('');$('#totalSummary').textContent=fmt(total);$('#driveSummary').textContent=fmt(vals[0]);$('#drivePercent').textContent=(total?Math.round(vals[0]/total*100):0)+'%'}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{if(b.tagName==='A')e.preventDefault();page(b.dataset.page)}));$$('[data-open-module]').forEach(b=>b.addEventListener('click',()=>openModule(b.dataset.openModule)));$('#moduleSearch').addEventListener('input',renderModules);$('#docSearch').addEventListener('input',renderDocs);$$('[data-filter]').forEach(b=>{b.setAttribute('aria-pressed',String(b.classList.contains('active')));b.addEventListener('click',()=>{currentFilter=b.dataset.filter;$$('[data-filter]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});renderModules()})});$('#saveProfile').addEventListener('click',()=>{profile.name=$('#displayName').value.trim();if(setStore('splink_profile_v1',profile))toast('Profil enregistré sur cet appareil')});$('#clearHistory').addEventListener('click',()=>{history=[];const saved=setStore('splink_user_history_v1',history);renderAccount();renderStats();if(saved)toast('Historique local effacé')});cats.forEach(({key})=>{const input=$('#'+key+'Duration');input.addEventListener('input',renderChart);input.addEventListener('blur',()=>{const value=min(key);if(value!==null)input.value=fmt(value)})});$('#resetCalc').addEventListener('click',()=>{const vals={drive:'4 h 30',work:'1 h 30',avail:'1 h 00',break:'1 h 00'};Object.entries(vals).forEach(([k,v])=>$('#'+k+'Duration').value=v);renderChart()});
-renderModules();renderStats();renderDocs();renderChart();renderAccount();
+renderModules();renderStats();renderDocs();renderChart();
+function guardAccountHash(){let hash;try{hash=decodeURIComponent(location.hash.slice(1)).toLowerCase()}catch(error){console.error('Fragment URL invalide',error);return}if(/^(?:page-)?account(?:$|[-/])/.test(hash)){window.history.replaceState(window.history.state,'',location.pathname+location.search);page('account')}}
+window.addEventListener('hashchange',guardAccountHash);guardAccountHash();
 $('#saveProfile').addEventListener('click',()=>{$('#accountGreeting').textContent=profile.name?`Bonjour ${profile.name}`:'Bienvenue sur SPLink'});
 function syncModuleNav(){const training=currentFilter==='Formation';$('#modulesHeading').textContent=training?'Formation':'Tous les modules';if(!$('#page-modules').classList.contains('active'))return;$('#crumbTitle').textContent=training?'Formation':labels.modules;[$('#mobileNav [data-page="modules"]'),$('[data-training]')].forEach((button,index)=>{const active=index===Number(training);button.classList.toggle('active',active);if(active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')})}
 $$('#sideNav [data-page="modules"], #mobileNav [data-page="modules"]').forEach(button=>button.addEventListener('click',()=>{$('#moduleSearch').value='';$('[data-filter="Tous"]').click()}));
@@ -445,7 +455,6 @@ if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigato
 <script>window.SPModules = {};</script>
 <script src="assets/module-calculator.js"></script>
 <script src="assets/modules-terrain.js"></script>
-<script src="assets/learning-data.js"></script>
 <script src="assets/modules-learning.js"></script>
 <script src="assets/custom-select.js"></script>
 </body></html>
